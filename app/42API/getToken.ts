@@ -9,7 +9,8 @@ export async function getAccessToken(): Promise<string>
 			grant_type: "client_credentials",
 			client_id: process.env.CLIENT_ID,
 			client_secret: process.env.CLIENT_SECRET,
-		})
+		}),
+		cache: "no-store",
 	});
 	let	token = await response.json();
 	return (token.access_token);
