@@ -16,7 +16,7 @@ export default function RootLayout
 {
 	return (
 		<html lang="en">
-			<body className="bg-linear-to-b from-[#0f1726] to-[#14202f]">{children}</body>
+			<body className="bg-linear-to-b from-[#0f1726] to-[#14202f] bg-no-repeat text-white">{children}</body>
 		</html>
 	);
 }

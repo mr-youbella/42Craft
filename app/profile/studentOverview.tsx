@@ -2,9 +2,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp, faAward, faDiagramProject, faPeopleGroup, faRibbon } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { Achievements, CompletedProject } from "./interface";
+import { Achievements, BestTeammate, CompletedProject } from "./interface";
 
-export default function BestTeammate({completed_projects, achievements, teammates}: {completed_projects: CompletedProject[], achievements: Achievements[], teammates: {login: string, full_name: string, img: string, count: number}})
+export default function StudentOverview({completed_projects, achievements, best_teammates}: {completed_projects: CompletedProject[], achievements: Achievements[], best_teammates: BestTeammate})
 {
 	let	[arrow_best_teammate, setArrowBestTeammate] = useState<boolean>(false);
 	let	[arrow_completed_projects, setArrowCompletedProjects] = useState<boolean>(false);
@@ -12,30 +12,30 @@ export default function BestTeammate({completed_projects, achievements, teammate
 
 	return (
 		<div>
-			<div onClick={() => (setArrowBestTeammate(!arrow_best_teammate))} className="bg-[#1e293b] my-5 rounded-2xl p-5 flex justify-between cursor-pointer">
+			<button onClick={() => (setArrowBestTeammate(!arrow_best_teammate))} className="bg-[#1e293b] my-5 rounded-2xl p-5 flex justify-between cursor-pointer w-full">
 				<h3 className="font-bold text-xl flex gap-2"><FontAwesomeIcon className="w-4 text-green-400" icon={faPeopleGroup}/>Your best teammate</h3>
 				<FontAwesomeIcon className="w-4 text-gray-400 my-auto" icon={arrow_best_teammate ? faAngleUp : faAngleDown}/>
-			</div>
+			</button>
 			<div className={`bg-linear-to-b from-[#14302f88] to-[#24554d83] rounded-2xl p-5 flex gap-5 transition-colors duration-400 hover:from-[#143025] hover:to-[#245550] ${arrow_best_teammate ? "block" : "hidden"}`}>
 				<div className="flex">
-					<img className="w-30 aspect-square rounded-2xl border border-gray-400/50 my-auto" src={teammates.img} alt="image intra profile"/>
+					<img className="w-30 aspect-square rounded-2xl border border-gray-400/50 my-auto" src={best_teammates.image} alt="image intra profile"/>
 				</div>
 				<div className="w-full">
-					<h3 className="font-bold text-2xl">{teammates.full_name}</h3>
-					<p className="text-cyan-300 text-base">{teammates.login}</p>
+					<h3 className="font-bold text-2xl">{best_teammates.full_name}</h3>
+					<a href={`https://profile.intra.42.fr/users/${best_teammates.login}`} className="text-cyan-300 text-base underline">@{best_teammates.login}</a>
 					<div className="flex gap-2 justify-between my-1">
 						<div className="bg-[#3341554D] w-full rounded-md border border-gray-400/20 p-1 space-y-1 text-center">
-							<h4 className="text-[#94a3b8] text-xl">Number of Projects you worked on together</h4>
-							<p className="font-bold text-3xl text-[#22eea3]">{teammates.count}</p>
+							<h4 className="text-[#94a3b8] text-md">Number of Projects you worked on together</h4>
+							<p className="font-bold text-3xl text-[#22eea3]">{best_teammates.count}</p>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div onClick={() => (setArrowCompletedProjects(!arrow_completed_projects))} className="bg-[#1e293b] my-5 rounded-2xl p-5 flex justify-between cursor-pointer">
+			<button onClick={() => (setArrowCompletedProjects(!arrow_completed_projects))} className="bg-[#1e293b] my-5 rounded-2xl p-5 flex justify-between cursor-pointer w-full">
 				<h3 className="font-bold text-xl flex gap-2"><FontAwesomeIcon className="w-4 text-blue-400" icon={faDiagramProject}/>Completed Projects ({completed_projects.length})</h3>
 				<FontAwesomeIcon className="w-4 text-gray-400 my-auto" icon={arrow_completed_projects ? faAngleUp : faAngleDown}/>
-			</div>
-			<div className={`grid grid-cols-4 gap-4 justify-between my-5 ${arrow_completed_projects ? "block" : "hidden"}`}>
+			</button>
+			<div className={`grid grid-cols-2 sm:grid-cols-4 gap-4 justify-between my-5 ${arrow_completed_projects ? "block" : "hidden"}`}>
 				{completed_projects.map((value, index) =>
 				{
 					return (
@@ -49,11 +49,11 @@ export default function BestTeammate({completed_projects, achievements, teammate
 					);
 				})}
 			</div>
-			<div onClick={() => (setArrowAchievements(!arrow_achievements))} className="bg-[#1e293b] my-5 rounded-2xl p-5 flex justify-between cursor-pointer">
-				<h3 className="font-bold text-xl flex gap-2"><FontAwesomeIcon className="w-4 text-purple-400" icon={faAward}/>Achievements</h3>
+			<button onClick={() => (setArrowAchievements(!arrow_achievements))} className="bg-[#1e293b] my-5 rounded-2xl p-5 flex justify-between cursor-pointer w-full">
+				<h3 className="font-bold text-xl flex gap-2"><FontAwesomeIcon className="w-4 text-purple-400" icon={faAward}/>Achievements ({achievements.length})</h3>
 				<FontAwesomeIcon className="w-4 text-gray-400 my-auto" icon={arrow_achievements ? faAngleUp : faAngleDown}/>
-			</div>
-			<div className={`grid grid-cols-2 gap-4 justify-between my-5 ${arrow_achievements ? "block" : "hidden"}`}>
+			</button>
+			<div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 justify-between my-5 ${arrow_achievements ? "block" : "hidden"}`}>
 				{achievements.map((value, index) =>
 				{
 					return (

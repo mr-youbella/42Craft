@@ -1,4 +1,4 @@
-import { getAccessToken } from "./getToken";
+import { getAccessToken } from "./getAccessToken";
 
 export async function getStudentLogime(login: string)
 {
