@@ -1,5 +1,5 @@
 import { getStudentData } from "../42API/getStudentData";
-import { getStudentLogime } from "../42API/getStudentLogtime";
+import { getStudentLogtime } from "../42API/getStudentLogtime";
 import { getStudentTeam } from "../42API/getStudentTeams";
 import { Achievements, BestTeammate, CompletedProject, StudentInfo } from "./interface";
 
@@ -74,7 +74,7 @@ export async function getBestTeammate(login: string): Promise<BestTeammate>
 export async function getStudentMonthlyLogtime(login: string): Promise<string>
 {
 
-	let	student_logtime: Record<string, string> = await getStudentLogime(login);
+	let	student_logtime: Record<string, string> = await getStudentLogtime(login);
 	let	date_now = new Date().toISOString().slice(0, 7);
 	let date_logime: string[] = Object.keys(student_logtime);
 	let	all_logime: string[] = [];
@@ -88,7 +88,7 @@ export async function getStudentMonthlyLogtime(login: string): Promise<string>
 	function timeToMs(time: string)
 	{
 		let	[h, m, s] = time.split(":");
-		return (Number(h) * 3600000 + Number(m) + 60000 + Number(s));
+		return (Number(h) * 3600000 + Number(m) * 60000 + Number(s) * 1000);
 	}
 	for (let i = 0; all_logime[i]; i++)
 		total_ms += timeToMs(all_logime[i]);

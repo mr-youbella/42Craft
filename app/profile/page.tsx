@@ -29,7 +29,7 @@ export default async function Profile()
 		}
 	}
 	let	login = await getLogin();
-	let	student: StudentInfo | undefined = await getStudentInfo(login);
+	let	student: StudentInfo = await getStudentInfo(login);
 	let	projects_in_progress: string[] = student.student_projects_stats.projects_in_progress;
 	let	completed_projects: CompletedProject[] = student.student_projects_stats.completed_projects;
 	let	max_score: number = student.student_projects_stats.max_score;

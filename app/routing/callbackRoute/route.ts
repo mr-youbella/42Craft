@@ -16,7 +16,7 @@ export async function GET(request: Request)
 			client_id: process.env.CLIENT_ID,
 			client_secret: process.env.CLIENT_SECRET,
 			code,
-			redirect_uri: "https://intraprofile.vercel.app/routing/callbackRoute"
+			redirect_uri: process.env.REDIRECT_URI
 
 		}),
 		cache: "no-store",
