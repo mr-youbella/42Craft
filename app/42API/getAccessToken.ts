@@ -13,5 +13,6 @@ export async function getAccessToken(): Promise<string>
 		cache: "no-store",
 	});
 	let	token = await response.json();
+	console.log(token);
 	return (token.access_token);
 }

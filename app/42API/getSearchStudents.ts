@@ -1,9 +1,9 @@
 import { getJwtToken } from "./getJwtToken";
 
-export async function getStudentData(login: string)
+export async function getSearchStudents(login: string)
 {
 	let	access_token = await getJwtToken();
-	let	response = await fetch(`https://api.intra.42.fr/v2/users/${login}`,
+	let	response = await fetch(`https://api.intra.42.fr/v2/users?search[login]=${login}&page[size]=10`,
 	{
 		method: "GET", 
 		headers: { Authorization: `Bearer ${access_token}` },

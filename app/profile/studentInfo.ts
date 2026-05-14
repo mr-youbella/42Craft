@@ -94,6 +94,7 @@ export async function getStudentMonthlyLogtime(login: string): Promise<string>
 		total_ms += timeToMs(all_logime[i]);
 	let	h = Math.floor(total_ms / 3600000);
 	let	m = Math.floor((total_ms % 3600000) / 60000);
-	let monthly_logtime = `${String(h).padStart(2, "0")}h:${String(m).padStart(2, "0")}m`;
+	let s = Math.floor((total_ms % 60000) / 1000);
+	let monthly_logtime = `${String(h).padStart(2, "0")}h:${String(m).padStart(2, "0")}m:${String(s).padStart(2, "0")}`;
 	return (monthly_logtime);
 }

@@ -1,7 +1,8 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { SignJWT } from "jose";
-import { jwt_secret } from "../secret";
+import { jwt_secret } from "../../secrets";
+import { getAccessToken } from "@/app/42API/getAccessToken";
 
 export async function GET(request: Request)
 {
@@ -22,6 +23,9 @@ export async function GET(request: Request)
 		cache: "no-store",
 	});
 	let	token = await response.json();
+	let	access_token = await getAccessToken();
+	let	jwt = await new SignJWT({token: access_token}).setProtectedHeader({alg: "HS256"}).setExpirationTime("2h").sign(jwt_secret);
+	(await cookies()).set("session_token", jwt);
 	response = await fetch(`https://api.intra.42.fr/v2/me`,
 	{
 		method: "GET", 
@@ -29,7 +33,7 @@ export async function GET(request: Request)
 		cache: "no-store",
 	});
 	let	data = await response.json();
-	let	jwt = await new SignJWT({login: data.login}).setProtectedHeader({alg: "HS256"}).setExpirationTime("2h").sign(jwt_secret);
+	jwt = await new SignJWT({login: data.login}).setProtectedHeader({alg: "HS256"}).setExpirationTime("2h").sign(jwt_secret);
 	(await cookies()).set("session", jwt);
 	redirect("/profile");
 }

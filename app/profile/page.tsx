@@ -6,11 +6,10 @@ import { getBestTeammate, getStudentInfo, getStudentMonthlyLogtime } from "./stu
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { jwtVerify } from "jose";
-import { jwt_secret } from "../routing/secret";
+import { jwt_secret } from "../secrets";
 
 export default async function Profile()
 {
-	
 	async function getLogin(): Promise<string>
 	{
 		try

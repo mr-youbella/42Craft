@@ -9,7 +9,7 @@ export default async function Home()
 				<div className="flex justify-between py-5 mx-4 xl:mx-auto xl:w-1/2">
 					<div className="flex gap-2">
 						<p className="bg-linear-to-b from-[#2980B9] to-[#2980B9] p-2.5 rounded-xl font-bold text-center">42</p>
-						<h1 className="font-bold text-xl my-auto">Intra Profile</h1>
+						<h1 className="font-bold text-xl my-auto">42 Craft</h1>
 					</div>
 				</div>
 			</nav>

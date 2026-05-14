@@ -1,8 +1,8 @@
-import { getAccessToken } from "./getAccessToken";
+import { getJwtToken } from "./getJwtToken";
 
 export async function getStudentTeam(login: string)
 {
-	let token = await getAccessToken();
+	let	access_token = await getJwtToken();
 	let	page = 1
 	let	all_data: any = [];
 	while (true)
@@ -10,7 +10,7 @@ export async function getStudentTeam(login: string)
 		let	response = await fetch(`https://api.intra.42.fr/v2/users/${login}/teams?page[size]=100&page[number]=${page}`,
 		{
 			method: "GET", 
-			headers: { Authorization: `Bearer ${token}` },
+			headers: { Authorization: `Bearer ${access_token}` },
 			cache: "no-store",
 		});
 		let	data = await response.json();
