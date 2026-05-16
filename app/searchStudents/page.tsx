@@ -49,11 +49,13 @@ export default function SearchStudent()
 						{result.map((value, index) =>
 						{
 							return (
-								<div key={index} className="bg-[#1e293b] rounded-2xl p-4 cursor-pointer hover:bg-blue-400/30">
-									<img className="w-15 rounded-xl" src={value.image.link}/>
-									<h3 className="mt-2 font-bold">{value.usual_full_name}</h3>
-									<p className="text-gray-300 text-sm">@{value.login}</p>
-								</div>
+								<Link key={index} href={`/students/${value.login}`}>
+									<div className="bg-[#1e293b] rounded-2xl p-4 cursor-pointer hover:bg-blue-400/30">
+										<img className="w-15 rounded-xl" src={value.image.link}/>
+										<h3 className="mt-2 font-bold">{value.usual_full_name}</h3>
+										<p className="text-gray-300 text-sm">@{value.login}</p>
+									</div>
+								</Link>
 							);
 						})}
 					</div>
